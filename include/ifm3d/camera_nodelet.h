@@ -29,6 +29,7 @@
 
 #include <ifm3d/camera.h>
 #include <ifm3d/fg.h>
+#include <ifm3d/fg_udp.h>
 #include <ifm3d/image.h>
 #include <ifm3d/Config.h>
 #include <ifm3d/Dump.h>
@@ -93,7 +94,7 @@ namespace ifm3d_ros
     std::string optical_frame_id_;
 
     ifm3d::Camera::Ptr cam_;
-    ifm3d::FrameGrabber::Ptr fg_;
+    ifm3d::FrameGrabberUdp::Ptr fg_;
     ifm3d::ImageBuffer::Ptr im_;
     std::mutex mutex_;
 

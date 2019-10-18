@@ -1,9 +1,10 @@
 cmake_minimum_required(VERSION 3.5)
 project(ifm3d)
 
-find_package(ifm3d 0.11.2 CONFIG REQUIRED COMPONENTS
+find_package(ifm3d 0.16.0 CONFIG REQUIRED COMPONENTS
              camera
              framegrabber
+             framegrabberudp
              image
              )
 
@@ -73,6 +74,7 @@ target_link_libraries(ifm3d_ros
   ${catkin_LIBRARIES}
   ifm3d::camera
   ifm3d::framegrabber
+  ifm3d::framegrabberudp
   ifm3d::image
   )
 add_dependencies(ifm3d_ros ${PROJECT_NAME}_generate_messages_cpp)

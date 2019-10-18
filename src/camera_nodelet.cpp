@@ -37,6 +37,7 @@
 
 #include <ifm3d/camera.h>
 #include <ifm3d/fg.h>
+#include <ifm3d/fg_udp.h>
 #include <ifm3d/image.h>
 #include <ifm3d/Config.h>
 #include <ifm3d/Dump.h>
@@ -251,7 +252,7 @@ ifm3d_ros::CameraNodelet::Trigger(ifm3d::Trigger::Request& req,
 
   try
     {
-      this->fg_->SWTrigger();
+      //this->fg_->SWTrigger();
     }
   catch (const ifm3d::error_t& ex)
     {
@@ -390,8 +391,12 @@ ifm3d_ros::CameraNodelet::InitStructures(std::uint16_t mask)
                                              this->password_);
       ros::Duration(1.0).sleep();
 
+      NODELET_INFO_STREAM("Enabling UDP...");
+      this->cam_->EnableUdp(mask,"192.168.0.2");
+
       NODELET_INFO_STREAM("Initializing framegrabber...");
-      this->fg_ = std::make_shared<ifm3d::FrameGrabber>(this->cam_, mask);
+      this->fg_ = std::make_shared<ifm3d::FrameGrabberUdp>();
+
 
       NODELET_INFO_STREAM("Initializing image buffer...");
       this->im_ = std::make_shared<ifm3d::ImageBuffer>();
